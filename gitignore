@@ -99,3 +99,7 @@ test_*.py
 *_test.py
 run_*.sh
 *.bat
+
+# Excepciones para permitir versionar datos
+!/data/README.md
+!/data/**/.gitkeep
