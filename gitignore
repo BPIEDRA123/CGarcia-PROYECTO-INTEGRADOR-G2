@@ -1,0 +1,101 @@
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+__pycache__/
+*.py[cod]
+*.so
+*.dll
+*.dylib
+
+# Entornos virtuales y dependencias
+venv/
+env/
+.venv/
+.env/
+*.egg-info/
+*.eggs/
+pip-wheel-metadata/
+__pypackages__/
+
+# Jupyter y Google Colab
+.ipynb_checkpoints/
+*.ipynb_convert/
+*.ipynb_bak/
+
+# Archivos temporales y logs
+*.log
+*.tmp
+*.bak
+*.swp
+*.out
+nohup.out
+
+# Modelos, datasets y resultados
+*.h5
+*.hdf5
+*.ckpt
+*.pb
+*.onnx
+*.tflite
+*.pkl
+*.joblib
+*.npy
+*.npz
+*.csv
+*.xlsx
+*.xls
+*.json
+*.parquet
+*.zip
+*.tar.gz
+*.7z
+
+# Directorios de datos y resultados
+/data/
+/datasets/
+/outputs/
+/results/
+/logs/
+/checkpoints/
+/models/
+/artifacts/
+/mlruns/
+
+# Imágenes generadas y visualizaciones
+*.png
+*.jpg
+*.jpeg
+*.bmp
+*.gif
+*.tiff
+/xai_examples/
+
+# Configuraciones y secretos
+*.env
+*.ini
+*.cfg
+secrets.json
+config.json
+token.json
+credentials.json
+
+# IDEs y herramientas
+.vscode/
+.idea/
+.spyderproject
+.spyproject
+*.code-workspace
+
+# Documentos locales
+*.pdf
+*.docx
+*.md
+README.md
+requirements.txt
+.gitignore
+
+# Archivos de ejecución o pruebas
+test_*.py
+*_test.py
+run_*.sh
+*.bat
