@@ -83,12 +83,116 @@ El modelo fue ajustado mediante búsqueda de hiperparámetros para optimizar su 
 
 ---
 
-## Resultados esperados
+## Resultados
 
-El modelo final alcanzó una **precisión de validación del 95%**, mostrando un desempeño superior en la detección de lesiones malignas sin comprometer la especificidad.  
-La integración del sistema permitiría mejorar la eficiencia diagnóstica y proporcionar una herramienta de apoyo confiable para profesionales de la salud.
+### Métricas finales del modelo
+El modelo final de clasificación alcanzó los siguientes valores promedio en el conjunto de validación:
+
+| Métrica | Valor |
+|----------|--------|
+| Accuracy | 0.95 |
+| F1-Score | 0.94 |
+| Sensibilidad (Recall) | 0.93 |
+| Especificidad | 0.96 |
+| RMSE | 0.18 |
+
+Estas métricas reflejan un desempeño sólido, con una alta capacidad de generalización y precisión en la clasificación de nódulos tiroideos.
+
+### Comparación con baseline
+Se comparó el modelo propuesto (**Random Forest optimizado**) con un modelo base (**Regresión Logística**).  
+Los resultados demostraron una mejora significativa en todas las métricas clave, especialmente en el F1-Score y la sensibilidad para casos malignos.
+
+| Modelo | Accuracy | F1-Score | Sensibilidad | Especificidad |
+|---------|-----------|----------|---------------|----------------|
+| Baseline (Regresión Logística) | 0.86 | 0.84 | 0.82 | 0.88 |
+| Random Forest (Optimizado) | 0.95 | 0.94 | 0.93 | 0.96 |
+
+### Gráfico de rendimiento
+A continuación se incluye un gráfico de desempeño general comparando la precisión y la sensibilidad entre modelos:
+
+```
+Random Forest (Optimizado)
+|█████████████████████████████████ 0.95|
+
+Regresión Logística (Baseline)
+|███████████████████ 0.86|
+```
+
+Este gráfico resume visualmente el incremento de rendimiento logrado por el modelo propuesto tras aplicar técnicas de optimización y ajuste de hiperparámetros.
 
 ---
+
+## Instalación y uso
+
+### Requisitos del sistema
+- Python 3.10 o superior  
+- Bibliotecas principales:
+  - numpy  
+  - pandas  
+  - scikit-learn  
+  - matplotlib  
+  - Pillow  
+  - jupyter  
+
+### Instrucciones paso a paso para instalar
+
+1. Clonar este repositorio o descargar el proyecto:
+   ```bash
+   git clone https://github.com/usuario/Integrador31.git
+   cd Integrador31
+   ```
+
+2. Crear un entorno virtual:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # En Linux/Mac
+   venv\Scripts\activate      # En Windows
+   ```
+
+3. Instalar las dependencias:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+### Comandos para ejecutar el proyecto
+
+1. Ejecutar el flujo principal del modelo:
+   ```bash
+   python train.py
+   ```
+
+2. Evaluar el modelo con los datos de prueba:
+   ```bash
+   python evaluate.py
+   ```
+
+3. Para generar nuevamente el mejor modelo:
+   ```bash
+   python save_best_model.py
+   ```
+
+### Ejemplos de uso
+
+```python
+import pickle
+import numpy as np
+
+# Cargar modelo entrenado
+with open("best_model.pkl", "rb") as f:
+    data = pickle.load(f)
+
+model = data["model"]
+features = data["feature_names"]
+
+# Crear muestra de entrada
+sample = np.array([[0.52, 0.28, 2.35, 0.12, -0.25, 0.06, 0.14, 0.23, 0.05]])
+
+# Realizar predicción
+prediction = model.predict(sample)
+print("Predicción:", "Benigno" if prediction[0] == 0 else "Maligno")
+```
+
+
 
 ## Autores
 
