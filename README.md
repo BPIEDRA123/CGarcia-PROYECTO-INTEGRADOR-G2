@@ -14,8 +14,13 @@ A través de técnicas de procesamiento digital de imágenes y modelos de aprend
 1. [Descripción del problema](#descripción-del-problema)  
 2. [Dataset](#dataset)  
 3. [Metodología](#metodología)  
-4. [Resultados esperados](#resultados-esperados)  
-5. [Autores](#autores)  
+4. [Resultados](#resultados)  
+5. [Instalación y uso](#instalación-y-uso)  
+6. [Estructura del proyecto](#estructura-del-proyecto)  
+7. [Consideraciones éticas](#consideraciones-éticas)  
+8. [Autores y contribuciones](#autores-y-contribuciones)  
+9. [Licencia](#licencia)  
+10. [Agradecimientos y referencias](#agradecimientos-y-referencias)
 
 ---
 
@@ -85,9 +90,6 @@ El modelo fue ajustado mediante búsqueda de hiperparámetros para optimizar su 
 
 ## Resultados
 
-### Métricas finales del modelo
-El modelo final de clasificación alcanzó los siguientes valores promedio en el conjunto de validación:
-
 | Métrica | Valor |
 |----------|--------|
 | Accuracy | 0.95 |
@@ -96,29 +98,7 @@ El modelo final de clasificación alcanzó los siguientes valores promedio en el
 | Especificidad | 0.96 |
 | RMSE | 0.18 |
 
-Estas métricas reflejan un desempeño sólido, con una alta capacidad de generalización y precisión en la clasificación de nódulos tiroideos.
-
-### Comparación con baseline
-Se comparó el modelo propuesto (**Random Forest optimizado**) con un modelo base (**Regresión Logística**).  
-Los resultados demostraron una mejora significativa en todas las métricas clave, especialmente en el F1-Score y la sensibilidad para casos malignos.
-
-| Modelo | Accuracy | F1-Score | Sensibilidad | Especificidad |
-|---------|-----------|----------|---------------|----------------|
-| Baseline (Regresión Logística) | 0.86 | 0.84 | 0.82 | 0.88 |
-| Random Forest (Optimizado) | 0.95 | 0.94 | 0.93 | 0.96 |
-
-### Gráfico de rendimiento
-A continuación se incluye un gráfico de desempeño general comparando la precisión y la sensibilidad entre modelos:
-
-```
-Random Forest (Optimizado)
-|█████████████████████████████████ 0.95|
-
-Regresión Logística (Baseline)
-|███████████████████ 0.86|
-```
-
-Este gráfico resume visualmente el incremento de rendimiento logrado por el modelo propuesto tras aplicar técnicas de optimización y ajuste de hiperparámetros.
+El modelo optimizado superó al baseline (Regresión Logística) con mejoras notables en todas las métricas de desempeño, especialmente en la sensibilidad hacia los casos malignos.
 
 ---
 
@@ -126,75 +106,150 @@ Este gráfico resume visualmente el incremento de rendimiento logrado por el mod
 
 ### Requisitos del sistema
 - Python 3.10 o superior  
-- Bibliotecas principales:
-  - numpy  
-  - pandas  
-  - scikit-learn  
-  - matplotlib  
-  - Pillow  
-  - jupyter  
+- numpy, pandas, scikit-learn, matplotlib, Pillow, jupyter
 
-### Instrucciones paso a paso para instalar
+### Pasos de instalación
 
-1. Clonar este repositorio o descargar el proyecto:
-   ```bash
-   git clone https://github.com/usuario/Integrador31.git
-   cd Integrador31
-   ```
-
-2. Crear un entorno virtual:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate   # En Linux/Mac
-   venv\Scripts\activate      # En Windows
-   ```
-
-3. Instalar las dependencias:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-### Comandos para ejecutar el proyecto
-
-1. Ejecutar el flujo principal del modelo:
-   ```bash
-   python train.py
-   ```
-
-2. Evaluar el modelo con los datos de prueba:
-   ```bash
-   python evaluate.py
-   ```
-
-3. Para generar nuevamente el mejor modelo:
-   ```bash
-   python save_best_model.py
-   ```
-
-### Ejemplos de uso
-
-```python
-import pickle
-import numpy as np
-
-# Cargar modelo entrenado
-with open("best_model.pkl", "rb") as f:
-    data = pickle.load(f)
-
-model = data["model"]
-features = data["feature_names"]
-
-# Crear muestra de entrada
-sample = np.array([[0.52, 0.28, 2.35, 0.12, -0.25, 0.06, 0.14, 0.23, 0.05]])
-
-# Realizar predicción
-prediction = model.predict(sample)
-print("Predicción:", "Benigno" if prediction[0] == 0 else "Maligno")
+```bash
+git clone https://github.com/usuario/Integrador31.git
+cd Integrador31
+python -m venv venv
+source venv/bin/activate   # Linux/Mac
+venv\Scripts\activate    # Windows
+pip install -r requirements.txt
 ```
 
+### Ejecución del proyecto
 
+```bash
+python train.py
+python evaluate.py
+```
 
-## Autores
+### Ejemplo de uso
 
-**Byron Piedra**  
-**Christian García**
+```python
+import pickle, numpy as np
+with open("best_model.pkl", "rb") as f:
+    data = pickle.load(f)
+model = data["model"]
+sample = np.array([[0.52, 0.28, 2.35, 0.12, -0.25, 0.06, 0.14, 0.23, 0.05]])
+print("Predicción:", "Benigno" if model.predict(sample)[0] == 0 else "Maligno")
+```
+
+---
+
+## Estructura del proyecto
+
+```bash
+nombre-proyecto/
+│
+├── README.md                       # Descripción principal del proyecto
+├── requirements.txt                 # Dependencias de Python
+├── .gitignore                       # Archivos a ignorar
+├── LICENSE                          # Licencia del proyecto
+│
+├── docs/                            # Documentación
+│   ├── planificacion.md
+│   ├── analisis_datos.md
+│   ├── arquitectura.md
+│   ├── optimizacion.md
+│   ├── consideraciones_eticas.md
+│   └── manual_usuario.md
+│
+├── data/
+│   ├── raw/
+│   ├── processed/
+│   └── README.md
+│
+├── notebooks/
+│   ├── 01_exploracion.ipynb
+│   ├── 02_preprocesamiento.ipynb
+│   ├── 03_modelado.ipynb
+│   ├── 04_optimizacion.ipynb
+│   └── 05_evaluacion.ipynb
+│
+├── src/
+│   ├── __init__.py
+│   ├── data_processing.py
+│   ├── model.py
+│   ├── train.py
+│   ├── evaluate.py
+│   └── utils.py
+│
+├── models/
+│   ├── best_model.pkl
+│   ├── model_v1.pkl
+│   └── README.md
+│
+├── app/
+│   ├── app.py
+│   ├── requirements.txt
+│   └── assets/
+│
+├── tests/
+│   ├── test_data_processing.py
+│   ├── test_model.py
+│   └── test_app.py
+│
+└── results/
+    ├── figures/
+    ├── metrics/
+    └── reports/
+```
+
+---
+
+### Tabla explicativa del contenido del proyecto
+
+| Carpeta / Archivo | Propósito principal | Actividades esperadas |
+|--------------------|---------------------|------------------------|
+| **README.md** | Documento principal del proyecto. | Presenta objetivos, metodología y resultados. |
+| **requirements.txt** | Dependencias del entorno. | Instalar bibliotecas necesarias para ejecutar el código. |
+| **docs/** | Documentación técnica y metodológica. | Incluir análisis, planificación, arquitectura, y aspectos éticos. |
+| **data/** | Datos utilizados en el estudio. | Almacenar datos originales (`raw`) y procesados (`processed`). |
+| **notebooks/** | Cuadernos Jupyter para el flujo experimental. | Ejecutar exploración de datos, preprocesamiento, modelado y evaluación. |
+| **src/** | Código fuente modular del sistema. | Contiene scripts de procesamiento, modelado y entrenamiento. |
+| **models/** | Modelos entrenados en formato `.pkl`. | Guardar versiones del modelo y sus descripciones. |
+| **app/** | Aplicación o interfaz de usuario. | Implementar una interfaz (ej. Streamlit o Flask) para el uso del modelo. |
+| **tests/** | Pruebas unitarias. | Validar funcionamiento de módulos y asegurar calidad del código. |
+| **results/** | Resultados y visualizaciones generadas. | Guardar métricas, gráficos y reportes de evaluación. |
+
+---
+
+## Consideraciones éticas
+
+- Se priorizó la confidencialidad y anonimización de los datos médicos.  
+- Los modelos fueron desarrollados exclusivamente con fines académicos.  
+- El sistema no reemplaza el juicio clínico de profesionales de la salud.  
+- Se advierte que el uso inadecuado fuera de un contexto médico puede generar interpretaciones erróneas.
+
+---
+
+## Autores y contribuciones
+
+| Integrante | Rol |
+|-------------|------|
+| **Byron Piedra** | Análisis de campo, documentación técnica, validación de resultados y revisión académica. |
+| **Christian García** | Desarrollo de código, análisis metodológico,  entrenamiento de modelo, validación de resultados. |
+
+---
+
+## Licencia
+
+Este proyecto se distribuye bajo la licencia **MIT**, permitiendo su uso académico y científico con la debida atribución.
+
+---
+
+## Agradecimientos y referencias
+
+**Agradecimientos:**  
+Se agradece el apoyo a Dios y nuestra familia, tambien del cuerpo docente y tutores de la Maestría en Inteligencia Artificial, así como el acceso a los recursos técnicos utilizados para la ejecución del proyecto.
+
+**Referencias:**  
+1. Chollet, F. (2018). *Deep Learning with Python*. Manning Publications.  
+2. Pedregosa, F. et al. (2011). *Scikit-learn: Machine Learning in Python*. *JMLR*, 12, 2825–2830.  
+3. Zhang, Y., et al. (2020). *Thyroid Nodule Classification in Ultrasound Images Using Deep Learning Models*. *IEEE Access*, 8, 11862–11870.  
+4. Kaggle (2022). *Thyroid Ultrasound Image Dataset*.  
+5. Open Access Biomedical Image Repository (OABIR).  
+
